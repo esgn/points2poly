@@ -2,6 +2,29 @@
 
 -----------
 
+How to install and run with conda on a machine with GPU
+
+```bash
+conda create --name p2p
+(p2p) conda config --add channels conda-forge
+(p2p) conda install -c conda-forge mamba
+(p2p) mamba install sage
+(p2p) pip install abspy
+(p2p) git clone --recurse-submodules https://github.com/chenzhaiyu/points2poly
+(p2p) cd points2poly
+(p2p) pip install -r points2surf/requirements.txt
+(p2p) pip install -r requirements.txt
+(p2p) python download.py dataset_name='helsinki_mini' model_name='helsinki_fullview'
+(p2p) python reconstruct.py dataset_name='helsinki_mini' model_name='helsinki_fullview'
+```
+
+I found necessary to comment cudatoolkit, zlib, libspatialindex in `points2surf/requirements.txt`.  
+I also edited `points2surf/source/base/point_cloud.py` to change `nb_jobs=nb_jobs` on line `174` ans `176`.
+
+
+-----------
+
+
 ## Introduction
 
 ***Points2Poly*** is an implementation of the paper [*Reconstructing Compact Building Models from Point Clouds Using Deep Implicit Fields*](https://www.sciencedirect.com/science/article/pii/S0924271622002611), which incorporates learnable implicit surface representation into explicitly constructed geometry.
